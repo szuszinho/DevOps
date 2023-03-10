@@ -1,0 +1,4 @@
+.terraform/
+.terraform.lock.hcl
+idrsa.pem
+terraform.tfvars
