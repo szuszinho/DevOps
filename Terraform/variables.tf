@@ -44,3 +44,9 @@ variable "network_range" {
   default = 24
 }
 variable "gateway" {}
+
+variable "public_key" {
+  description = "SSH public key"
+  type = string
+  sensitive = true
+}

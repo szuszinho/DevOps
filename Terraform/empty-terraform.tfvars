@@ -19,3 +19,5 @@ worker_ips = [
   "",
   "",
 ]
+
+public_key = ""

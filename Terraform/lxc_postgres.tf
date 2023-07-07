@@ -23,7 +23,7 @@ resource "proxmox_lxc" "db_postgres" {
   swap = 0
   tags = "Postgres K3s etcd"
   vmid = 399
-  ssh_public_keys = ""
+  ssh_public_keys = var.public_key 
 
   rootfs {
     storage = "storage"
