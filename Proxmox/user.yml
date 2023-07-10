@@ -4,6 +4,8 @@ package_update: true
 packages:
   - qemu-guest-agent
 
+ssh_pwauth: false
+
 users:
   - name: szuszi
     groups: adm, sudo
@@ -11,6 +13,14 @@ users:
     sudo: ALL=(ALL) NOPASSWD:ALL
     ssh_authorized_keys:
       - <ssh public key(s)>
+  - name: ansible
+    gecos: Ansible user
+    groups: users,admin,wheel
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    shell: /bin/bash
+    lock_password: true
+    ssh_authorized_keys:
+      - <ssh public key>
 
 runcmd:
   - systemctl enable qemu-guest-agent
