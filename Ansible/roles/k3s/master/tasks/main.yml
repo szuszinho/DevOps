@@ -1,7 +1,7 @@
 ---
 
 - name: Copy K3s service
-  register: k3s.service
+  register: k3s_service
   template:
     src: "k3s.service.j2"
     dest: "{{ systemd_dir }}/k3s.service"
@@ -76,4 +76,4 @@
   file:
     src: /usr/local/bin/k3s
     dest: /usr/local/bin/crictl
-  state: link
+    state: link
