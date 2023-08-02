@@ -32,7 +32,7 @@
 
 - name: Read node-token from master
   slurp:
-    path: "{{ k3s_server_location }}/server=node-token"
+    path: "{{ k3s_server_location }}/server/node-token"
   register: node_token
 
 - name: Store Mater node-token
