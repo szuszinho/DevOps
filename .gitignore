@@ -1,5 +1,4 @@
-/Proxmox/cloud.cfg
-
 /Terraform/.terraform/
 /Terraform/.terraform.lock.hcl
 /Terraform/terraform.*
+.terraform.tfstate.lock.info
