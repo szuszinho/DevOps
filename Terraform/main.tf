@@ -8,8 +8,8 @@ resource "proxmox_vm_qemu" "pm-vm-master" {
   clone = var.template_vm_name
   full_clone = true
 
-  cicustom = "user=Storage-nvme256:snippets/userconfig.yml"
-  cloudinit_cdrom_storage = "Storage-nvme256"
+  cicustom = "user=local:snippets/user.yml"
+  cloudinit_cdrom_storage = "nvme-lvm-1"
 
   agent = 1
   memory = var.num_k3s_master_memory
@@ -25,11 +25,16 @@ resource "proxmox_vm_qemu" "pm-vm-master" {
     bridge = "vmbr0"
   }
 
-  disk {
-    type = "scsi"
-    storage = "local-lvm"
-    size = "24G"
-    ssd = 1
+  disks {
+    scsi{
+      scsi0{
+        disk{
+          storage = "nvme-lvm-1"
+          size = 24
+        }
+      }
+    }
+    
   }
 
   lifecycle {
@@ -47,8 +52,8 @@ resource "proxmox_vm_qemu" "pm-vm-worker" {
   clone = var.template_vm_name
   full_clone = true
 
-  cicustom = "user=Storage-nvme256:snippets/userconfig.yml"
-  cloudinit_cdrom_storage = "Storage-nvme256"
+  cicustom = "user=local:snippets/user.yml"
+  cloudinit_cdrom_storage = "storage"
   
   agent = 1
   memory = var.num_k3s_worker_memory
@@ -64,11 +69,15 @@ resource "proxmox_vm_qemu" "pm-vm-worker" {
     bridge = "vmbr0"
   }
 
-  disk {
-    type = "scsi"
-    storage = "Storage-nvme256"
-    size = "24G"
-    ssd = 1
+  disks {
+    scsi{
+      scsi0{
+        disk {
+          storage = "storage"
+          size = 24
+        }
+      }
+    }
   }
 
   lifecycle {

@@ -13,7 +13,7 @@ resource "proxmox_lxc" "db_postgres" {
   description = "Postgres LXC container for K3s etcd"
   target_node = var.pm_nodename
   hostname = "postgres"
-  ostemplate = "local:vztmpl/debian-11-turnkey-postgresql_17.1-1_amd64.tar.gz"
+  ostemplate = "storage:vztmpl/debian-12-turnkey-postgresql_18.0-1_amd64.tar.gz"
   password = var.pswd
   unprivileged = true
   cores = 3
