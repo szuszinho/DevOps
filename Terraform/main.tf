@@ -4,6 +4,7 @@ resource "proxmox_vm_qemu" "pm-vm-master" {
   target_node = var.pm_nodename
   vmid = 301 + count.index
   desc = "K3s master-${count.index+1}"
+  onboot = true
 
   clone = var.template_vm_name
   full_clone = true
@@ -48,6 +49,7 @@ resource "proxmox_vm_qemu" "pm-vm-worker" {
   target_node = var.pm_nodename
   vmid = 310 + count.index
   desc = "K3s worker-${count.index+1}"
+  onboot = true
 
   clone = var.template_vm_name
   full_clone = true
