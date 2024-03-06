@@ -2,3 +2,7 @@
 /Terraform/.terraform.lock.hcl
 /Terraform/terraform.*
 .terraform.tfstate.lock.info
+
+/Kubernetes
+
+/MetalLB
