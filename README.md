@@ -14,3 +14,6 @@ Create K3s infra
 3. Ansible
 
 Create K3s cluster (k3s-ansible fork)
+
+4. Rename the VMs hostnames
+ 
