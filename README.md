@@ -11,9 +11,13 @@ Create VM template from cloud image
 Create K3s infra
     postgres container + master(s) + nodes
 
-3. Ansible
+3. Rename the VMs hostnames
+
+4. Ansible
 
 Create K3s cluster (k3s-ansible fork)
 
-4. Rename the VMs hostnames
+5. Install MetalLB
+
+6. Install Traefik
  
