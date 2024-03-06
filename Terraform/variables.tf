@@ -26,12 +26,19 @@ variable "num_k3s_master" {
 variable "num_k3s_master_memory" {
   default = "2048"
 }
+variable "master_storage" {
+  description = "storage of the VM disk"
+}
 variable "num_k3s_worker" {
   default = 3
 }
 variable "num_k3s_worker_memory" {
-  default = "1024"
+  default = "2048"
 }
+variable "worker_storage" {
+  description = "storage of the VM disk"
+}
+
 variable "template_vm_name" {}
 variable "master_ips" {
   description = "List of K3s master nodes IPs"
