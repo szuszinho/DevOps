@@ -3,6 +3,7 @@
 package_update: true
 packages:
   - qemu-guest-agent
+  - nfs-common
 
 ssh_pwauth: false
 
