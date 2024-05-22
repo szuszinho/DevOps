@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: totalbody
+  namespace: homeserver
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: totalbody
+  template:
+    metadata:
+      labels:
+        app: totalbody
+    spec:
+      containers:
+      - name: totalbody
+        image: szuszinho/totalbody
+#        volumeMounts:
+#          - name: static
+#            mountPath: /static
+        envFrom:
+          - secretRef:
+              name: totalbody-sc
+          - configMapRef:
+              name: totalbody-cm
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8000
+#      volumes:
+#        - name: static
+#          persistentVolumeClaim:
+#            claimName: totalbody-static
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: totalbody
+spec:
+  selector:
+    app: totalbody
+  ports:
+  - name: gunicorn
+    port: 8000
+    targetPort: 8000
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: totalbody
+  labels:
+    name: totalbody
+spec:
+  rules:
+  - host: totalbody.hu
+    http:
+      paths:
+      - path: "/"
+        pathType: Prefix
+        backend:
+          service:
+            name: totalbody
+            port: 
+              number: 8000
+  tls:
+    - hosts:
+      - totalbody.hu
+      secretName: issuer-account-key
+

@@ -1,0 +1,79 @@
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vaultwarden
+  namespace: homeserver
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vaultwarden
+  template:
+    metadata:
+      labels:
+        app: vaultwarden
+    spec:
+      containers:
+      - name: vaultwarden
+        image: vaultwarden/server:latest
+        env:
+          - name: SIGNUPS_ALLOWED
+            value: "false"          
+          - name: INVITATIONS_ALLOWED
+            value: "false"          
+          - name: WEBSOCKET_ENABLED
+            value: "true"          
+        volumeMounts:
+          - name: vaultwarden-pvc
+            mountPath: "/data"
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
+      volumes:
+        - name: vaultwarden-pvc
+          persistentVolumeClaim:
+            claimName: vaultwarden-claim
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: vaultwarden
+  namespace: homeserver
+spec:
+  selector:
+    app: vaultwarden
+  ports:
+  - port: 80
+    targetPort: 80
+  type: ClusterIP
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: vaultwarden
+  namespace: homeserver
+  labels:
+    name: vaultwarden
+spec:
+  rules:
+  - host: vaultwarden.szuszi.eu
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: vaultwarden
+            port: 
+              number: 80
+  tls:
+    - hosts:
+      - vaultwarden.szuszi.eu
+      secretName: issuer-account-key

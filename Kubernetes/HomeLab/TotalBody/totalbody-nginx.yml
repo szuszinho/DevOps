@@ -1,0 +1,69 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+  namespace: homeserver
+spec:
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
+        volumeMounts:
+          - name: static
+            mountPath: /usr/share/nginx/html
+          - name: nginx-c
+            mountPath: /etc/nginx/conf.d
+      volumes:
+          - name: static
+            persistentVolumeClaim:
+              claimName: totalbody-static
+          - name: nginx-c
+            persistentVolumeClaim:
+              claimName: nginx-conf
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx
+  namespace: homeserver
+spec:
+  selector:
+    app: nginx
+  ports:
+  - port: 80
+    targetPort: 80
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nginx
+  labels:
+    name: nginx
+spec:
+  rules:
+  - host: static.local.szuszi.eu
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: nginx
+            port: 
+              number: 80
+

@@ -5,5 +5,7 @@
 
 /k3s-ansible/
 
-/Kubernetes/HomeLab/
+/Kubernetes/HomeLab/nexus/
+/Kubernetes/HomeLab/QbitTorrent/
+/Kubernetes/HomeLab/traefik-dashboard/
 /Kubernetes/Totalbody/
