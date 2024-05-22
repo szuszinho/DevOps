@@ -1,0 +1,15 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: homeserver-cert
+  namespace: homeserver
+spec:
+  secretName: issuer-account-key
+  issuerRef:
+    name:  letsencrypt
+    kind: ClusterIssuer
+  dnsNames:
+  - "szuszi.eu"
+  - "local.szuszi.eu"
+  - "*.local.szuszi.eu"
+  - "totalbody.hu"
