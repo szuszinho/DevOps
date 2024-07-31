@@ -2,6 +2,7 @@
 /Terraform/.terraform.lock.hcl
 /Terraform/terraform.*
 .terraform.tfstate.lock.info
+/Terraform/lxc_postgres.tf.old
 
 /k3s-ansible/
 
