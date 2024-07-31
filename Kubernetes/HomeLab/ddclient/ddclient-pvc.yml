@@ -6,7 +6,7 @@ metadata:
   name: ddclient-pvc
   namespace: ddclient
 spec:
-  storageClassName: nfs-home
+  storageClassName: fileserver-nfs
   resources:
     requests:
       storage: 5Mi

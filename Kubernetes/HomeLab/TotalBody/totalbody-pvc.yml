@@ -4,7 +4,7 @@ metadata:
   name: totalbody-static
   namespace: homeserver
 spec:
-  storageClassName: nfs-home
+  storageClassName: fileserver-nfs
   resources:
     requests:
       storage: 100Mi
@@ -17,7 +17,7 @@ metadata:
   name: nginx-conf
   namespace: homeserver
 spec:
-  storageClassName: nfs-home
+  storageClassName: fileserver-nfs
   resources:
     requests:
       storage: 10Mi

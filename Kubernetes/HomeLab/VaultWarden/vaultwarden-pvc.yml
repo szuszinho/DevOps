@@ -5,7 +5,7 @@ metadata:
   name: vaultwarden-claim
   namespace: homeserver
 spec:
-  storageClassName: nfs-home
+  storageClassName: fileserver-nfs
   resources:
     requests:
       storage: 50Mi
