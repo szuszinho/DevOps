@@ -56,7 +56,7 @@ metadata:
     name: nginx
 spec:
   rules:
-  - host: static.local.szuszi.eu
+  - host: static.totalbody.hu
     http:
       paths:
       - pathType: Prefix

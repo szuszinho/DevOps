@@ -13,3 +13,4 @@ spec:
   - "local.szuszi.eu"
   - "*.local.szuszi.eu"
   - "totalbody.hu"
+  - "*.totalbody.hu"
